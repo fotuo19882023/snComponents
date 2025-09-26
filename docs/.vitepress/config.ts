@@ -44,7 +44,7 @@ export default defineConfig({
       label: '目录',
     },
 
-    socialLinks: [{ icon: 'github', link: 'https://github.com/maomao1996' }],
+    socialLinks: [{ icon: 'github', link: '' }],
 
     footer: {
       message: '如有转载或 CV 的请标注本站原文地址',
@@ -88,7 +88,7 @@ export default defineConfig({
 
   /* 生成站点地图 */
   sitemap: {
-    hostname: 'https://notes.fe-mm.com/',
+    hostname: '',
   },
 
   vite: {
