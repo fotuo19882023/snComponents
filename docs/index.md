@@ -76,15 +76,12 @@ import MFriends from './home/MFriends.vue'
 
 - 网站名称: **神农物语**
 - 网站描述: **神农的成长之路，包含前端常用知识、源码阅读笔记、各种奇淫技巧、日常提效工具等**
-- 网站地址：**<https://notes.fe-mm.com>**
-- 网站图标：**<https://notes.fe-mm.com/logo.png>**
 
 ```json
 {
   "title": "神农物语",
   "desc": "神农的成长之路，包含前端常用知识、源码阅读笔记、各种奇淫技巧、日常提效工具等",
-  "link": "https://notes.fe-mm.com",
-  "icon": "https://notes.fe-mm.com/logo.png"
+
 }
 ```
 

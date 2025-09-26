@@ -9,7 +9,8 @@ const APP_BASE_PATH = basename(process.env.APP_BASE_PATH || '')
 
 export default defineConfig({
   outDir: '../dist',
-  base: APP_BASE_PATH ? `/${APP_BASE_PATH}/` : '/',
+  // base: APP_BASE_PATH ? `/${APP_BASE_PATH}/` : '/',
+  base: '/snComponents/',
 
   lang: 'zh-CN',
   title: '神农物语',
