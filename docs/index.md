@@ -1,237 +1,109 @@
-# SnSelectEnhanced - 增强版 Select 组件
+---
+layout: home
+layoutClass: 'm-home-layout'
 
-基于 Element Plus 的 el-select 组件进行二次封装，继承原有组件的所有功能，并扩展了多项实用功能。
-
-## 功能特性
-
-- ✅ 继承 el-select 的所有原生功能
-- ✅ 支持远程搜索和分页加载
-- ✅ 多选模式下支持全选/反选
-- ✅ 支持选项分组显示
-- ✅ 支持自定义选项模板
-- ✅ 支持一键复制选中内容
-- ✅ 支持加载状态显示
-- ✅ 支持防抖搜索
-- ✅ 完整的 TypeScript 支持
-
-## 基础用法
-
-```vue
-<template>
-  <SnSelectEnhanced v-model="value" :options="options" placeholder="请选择" />
-</template>
+hero:
+  name: 神农物语
+  text: 前端 的成长之路
+  tagline: 知识是进步的阶梯，争取每天都有知识点更新
+  image:
+    src: /logo.png
+    alt: 神农物语
+  actions:
+    - text: 前端物语
+      link: /fe/es6/
+    - text: 前端导航
+      link: /nav
+      theme: alt
+    - text: 日常笔记
+      link: /daily-notes/
+    - text: mmPlayer
+      link: https://netease-music.fe-mm.com
+      theme: alt
+features:
+  - icon: 📖
+    title: 前端物语
+    details: 整理前端常用知识点<small>（面试八股文）</small><br />如有异议按你的理解为主，不接受反驳
+    link: /fe/javascript/types
+    linkText: 前端常用知识
+  - icon: 📘
+    title: 源码阅读
+    details: 了解各种库的实现原理<br />学习其中的小技巧和冷知识
+    link: /analysis/utils/only-allow
+    linkText: 源码阅读
+  - icon: 💡
+    title: Workflow
+    details: 在工作中学到的一切<small>（常用库/工具/奇淫技巧等）</small><br />配合 CV 大法来更好的摸鱼
+    link: /workflow/utils/library
+    linkText: 常用工具库
+  - icon: 🧰
+    title: 提效工具
+    details: 工欲善其事，必先利其器<br />记录开发和日常使用中所用到的软件、插件、扩展等
+    link: /efficiency/online-tools
+    linkText: 提效工具
+  - icon: 🐞
+    title: 踩坑记录
+    details: 那些年我们踩过的坑<br />总有一些让你意想不到的问题
+    link: /pit/npm
+    linkText: 踩坑记录
+  - icon: 💯
+    title: 吾志所向，一往无前。
+    details: '<small class="bottom-small">一个想躺平的小开发</small>'
+    link: /mao
+---
 
 <script setup>
-  import { ref } from 'vue'
-  import SnSelectEnhanced from '@/components/common/SnSelectEnhanced'
-
-  const value = ref('')
-  const options = ref([
-    { value: '1', label: '选项1' },
-    { value: '2', label: '选项2' },
-    { value: '3', label: '选项3' }
-  ])
+import MFriends from './home/MFriends.vue'
 </script>
+
+<ClientOnly>
+  <MFriends/>
+</ClientOnly>
+
+::: details 申请友链
+
+**友链要求**:
+
+- 网站应保持清洁，避免过多广告内容
+- 网站需要有良好的稳定性和可靠性
+
+**申请方式**:
+
+1. 在本页面留言
+2. 直接访问 [GitHub 友链申请页面](https://github.com/maomao1996/mm-notes/issues/95) 提交您的申请
+
+**本站信息**：
+
+- 网站名称: **神农物语**
+- 网站描述: **神农的成长之路，包含前端常用知识、源码阅读笔记、各种奇淫技巧、日常提效工具等**
+- 网站地址：**<https://notes.fe-mm.com>**
+- 网站图标：**<https://notes.fe-mm.com/logo.png>**
+
+```json
+{
+  "title": "神农物语",
+  "desc": "神农的成长之路，包含前端常用知识、源码阅读笔记、各种奇淫技巧、日常提效工具等",
+  "link": "https://notes.fe-mm.com",
+  "icon": "https://notes.fe-mm.com/logo.png"
+}
 ```
 
-## 多选模式
+:::
 
-```vue
-<template>
-  <SnSelectEnhanced v-model="multiValue" :options="options" multiple show-select-all select-all-label="全部选择" />
-</template>
+<style>
+/*爱的魔力转圈圈*/
+.m-home-layout .image-src:hover {
+  transform: translate(-50%, -50%) rotate(666turn);
+  transition: transform 59s 1s cubic-bezier(0.3, 0, 0.8, 1);
+}
 
-<script setup>
-  const multiValue = ref([])
-</script>
-```
+.m-home-layout .details small {
+  opacity: 0.8;
+}
 
-## 远程搜索
-
-```vue
-<template>
-  <SnSelectEnhanced v-model="remoteValue" remote :remote-method="remoteSearch" @remote-search="handleRemoteSearch" />
-</template>
-
-<script setup>
-  const remoteValue = ref('')
-
-  const remoteSearch = async (query: string) => {
-    // 模拟 API 调用
-    const response = await fetch(`/api/search?q=${query}`)
-    return response.json()
-  }
-
-  const handleRemoteSearch = (query: string) => {
-    console.log('搜索关键词:', query)
-  }
-</script>
-```
-
-## 分页加载
-
-```vue
-<template>
-  <SnSelectEnhanced
-    v-model="pageValue"
-    :options="largeOptions"
-    pagination
-    :page-size="20"
-    load-more-text="点击加载更多"
-    @load-more="handleLoadMore"
-  />
-</template>
-
-<script setup>
-  const pageValue = ref('')
-  const largeOptions = ref([]) // 大量数据
-
-  const handleLoadMore = () => {
-    console.log('加载更多数据')
-  }
-</script>
-```
-
-## 选项分组
-
-```vue
-<template>
-  <SnSelectEnhanced v-model="groupValue" :options="groupedOptions" group-key="category" />
-</template>
-
-<script setup>
-  const groupValue = ref('')
-  const groupedOptions = ref([
-    { value: '1', label: '苹果', category: '水果' },
-    { value: '2', label: '香蕉', category: '水果' },
-    { value: '3', label: '胡萝卜', category: '蔬菜' },
-    { value: '4', label: '白菜', category: '蔬菜' }
-  ])
-</script>
-```
-
-## 自定义选项模板
-
-```vue
-<template>
-  <SnSelectEnhanced v-model="customValue" :options="userOptions">
-    <template #option="{ option }">
-      <div class="custom-option">
-        <img :src="option.avatar" class="avatar" />
-        <div class="info">
-          <div class="name">{{ option.name }}</div>
-          <div class="email">{{ option.email }}</div>
-        </div>
-      </div>
-    </template>
-  </SnSelectEnhanced>
-</template>
-
-<script setup>
-  const customValue = ref('')
-  const userOptions = ref([
-    {
-      value: '1',
-      label: '张三',
-      name: '张三',
-      email: 'zhangsan@example.com',
-      avatar: '/avatars/zhangsan.jpg'
-    }
-  ])
-</script>
-
-<style scoped>
-  .custom-option {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .avatar {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-  }
-
-  .info {
-    flex: 1;
-  }
-
-  .name {
-    font-weight: 500;
-  }
-
-  .email {
-    font-size: 12px;
-    color: #999;
-  }
+.m-home-layout .item:last-child .details {
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+}
 </style>
-```
-
-## 复制功能
-
-```vue
-<template>
-  <SnSelectEnhanced v-model="copyValue" :options="options" copyable />
-</template>
-```
-
-## Props
-
-| 参数           | 说明                   | 类型                                         | 默认值       |
-| -------------- | ---------------------- | -------------------------------------------- | ------------ |
-| options        | 选项数据               | `SelectOption[]`                             | `[]`         |
-| valueKey       | 选项值的字段名         | `string`                                     | `'value'`    |
-| labelKey       | 选项标签的字段名       | `string`                                     | `'label'`    |
-| disabledKey    | 选项禁用状态的字段名   | `string`                                     | `'disabled'` |
-| groupKey       | 选项分组的字段名       | `string`                                     | `'group'`    |
-| multiple       | 是否多选               | `boolean`                                    | `false`      |
-| showSelectAll  | 多选时是否显示全选选项 | `boolean`                                    | `false`      |
-| copyable       | 是否显示复制按钮       | `boolean`                                    | `false`      |
-| remote         | 是否远程搜索           | `boolean`                                    | `false`      |
-| pagination     | 是否启用分页           | `boolean`                                    | `false`      |
-| selectAllLabel | 全选选项的文本         | `string`                                     | `'全选'`     |
-| noDataText     | 无数据时的提示文本     | `string`                                     | `'暂无数据'` |
-| loadMoreText   | 加载更多按钮的文本     | `string`                                     | `'加载更多'` |
-| remoteMethod   | 远程搜索方法           | `(query: string) => Promise<SelectOption[]>` | -            |
-| pageSize       | 分页大小               | `number`                                     | `20`         |
-| debounceDelay  | 搜索防抖延迟（毫秒）   | `number`                                     | `300`        |
-
-## Events
-
-| 事件名         | 说明                                     | 参数                  |
-| -------------- | ---------------------------------------- | --------------------- |
-| change         | 选中值发生变化时触发                     | `(value: any)`        |
-| visible-change | 下拉框出现/隐藏时触发                    | `(visible: boolean)`  |
-| clear          | 可清空的单选模式下用户点击清空按钮时触发 | -                     |
-| focus          | 当 input 获得焦点时触发                  | `(event: FocusEvent)` |
-| blur           | 当 input 失去焦点时触发                  | `(event: FocusEvent)` |
-| remote-search  | 远程搜索时触发                           | `(query: string)`     |
-| load-more      | 点击加载更多时触发                       | -                     |
-
-## Slots
-
-| 插槽名 | 说明           | 参数                                      |
-| ------ | -------------- | ----------------------------------------- |
-| option | 自定义选项内容 | `{ option: SelectOption, index: number }` |
-
-## Methods
-
-| 方法名  | 说明              | 参数 |
-| ------- | ----------------- | ---- |
-| focus   | 使 input 获取焦点 | -    |
-| blur    | 使 input 失去焦点 | -    |
-| refresh | 刷新远程数据      | -    |
-
-## 类型定义
-
-```typescript
-interface SelectOption {
-  [key: string]: any
-}
-
-interface SelectGroup {
-  label: string
-  options: SelectOption[]
-}
-```
