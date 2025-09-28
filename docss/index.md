@@ -47,7 +47,7 @@ features:
     link: /pit/npm
     linkText: 踩坑记录
   - icon: 💯
-    title: 吾志所向，一往无前s。
+    title: 吾志所向，一往无前sss。
     details: '<small class="bottom-small">一个想躺平的小开发</small>'
     link: /mao
 ---
