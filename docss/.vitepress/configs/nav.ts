@@ -78,6 +78,10 @@ export const nav: DefaultTheme.Config['nav'] = [
         text: 'select组件',
         link: '/userComponents/select/select',
       },
+      {
+        text: '表格组件',
+        link: '/userComponents/grid/index',
+      },
     ],
     activeMatch: '^/userComponents',
   },

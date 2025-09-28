@@ -153,6 +153,10 @@ export const sidebar: DefaultTheme.Config['sidebar'] = {
       text: 'select组件',
       link: '/userComponents/select/select',
     },
+    {
+      text: '表格组件',
+      link: '/userComponents/grid/',
+    },
   ],
   '/efficiency/': [
     {
