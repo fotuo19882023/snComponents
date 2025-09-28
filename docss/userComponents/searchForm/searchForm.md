@@ -1,545 +1,302 @@
-# SnSearchForm 搜索表单组件
+# SnForm 表单组件
 
 ## 组件介绍
 
-SnSearchForm 是一个基于 Element Plus 的高级搜索表单组件，用于构建灵活的数据筛选界面。该组件支持多种表单控件类型，包括文本输入框、数字输入框、下拉选择器、日期选择器等，并且支持展开/收起高级搜索选项功能。
+SnForm 是一个功能强大的表单组件，专为复杂表单场景设计，支持表单项的动态配置、拖拽排序、条件筛选、预设值管理等高级功能。
 
 ## 功能特点
 
-- 支持多种表单控件类型
-- 支持基础搜索和高级搜索模式
-- 提供搜索、重置功能
-- 支持表单校验
-- 自适应布局，可配置表单项宽度
-- 支持自定义表单控件
+- **动态表单配置**：通过 JSON 配置生成表单，无需手动编写大量表单代码
+- **拖拽排序**：支持表单项的拖拽排序，可自定义表单布局
+- **表单项显示/隐藏**：可控制表单项的显示与隐藏
+- **预设值管理**：支持保存和应用表单预设值，提高用户体验
+- **条件筛选展示**：已选条件可视化展示，便于用户了解当前筛选状态
+- **排序设置**：支持数据排序配置
+- **自适应布局**：支持表单项的展开/收起，适应不同屏幕尺寸
+- **表单校验**：集成 Element Plus 的表单校验功能
+- **丰富的表单控件**：支持多种表单控件类型
 
-## 参数配置
+## 基本用法
+
+```vue
+<template>
+  <SnForm v-model="formData" :form-items="formItems" :search-render="searchRender" @search="handleSearch" />
+</template>
+
+<script setup>
+import { ref, reactive } from 'vue'
+
+const formData = ref({
+  name: '',
+  age: '',
+  date: []
+})
+
+const formItems = [
+  {
+    field: 'name',
+    label: '姓名',
+    type: 'input',
+    width: 2,
+    placeholder: '请输入姓名'
+  },
+  {
+    field: 'age',
+    label: '年龄',
+    type: 'inputNumber',
+    width: 2,
+    placeholder: '请输入年龄'
+  },
+  {
+    field: 'date',
+    label: '日期范围',
+    type: 'datePicker',
+    width: 4,
+    attrs: {
+      type: 'daterange',
+      startPlaceholder: '开始日期',
+      endPlaceholder: '结束日期'
+    }
+  }
+]
+
+const searchRender = {
+  showResult: true,
+  drag: true,
+  collapse: true,
+  dataSortable: true,
+  showItem: true
+}
+
+const handleSearch = (data) => {
+  console.log('搜索数据', data)
+}
+</script>
+```
+
+## API
 
 ### Props
 
-| 参数名 | 说明 | 类型 | 默认值 |
+| 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| fieldList | 基础搜索项配置 | Array | [] |
-| advancedFieldList | 高级搜索项配置 | Array | [] |
-| formData | 表单数据对象 | Object | {} |
-| rules | 表单校验规则 | Object | {} |
-| isMoreSeach | 是否启用高级搜索功能 | Boolean | false |
+| v-model | 表单数据对象 | Object | - |
+| formItems | 表单项配置数组 | Array | [] |
+| searchRender | 搜索相关配置 | Object | - |
+| isText | 是否以纯文本方式展示表单 | Boolean | false |
+| hidePlaceholder | 是否隐藏占位符文本 | Boolean | false |
+| id | 表单唯一标识，用于缓存配置 | String | - |
 
-### 表单项配置参数
+### searchRender 配置项
 
-每个表单项（fieldList 和 advancedFieldList 中的元素）支持以下配置：
-
-| 参数名 | 说明 | 类型 | 是否必填 |
+| 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| label | 表单项标签 | String | 是 |
-| field | 表单项字段名 | String | 是 |
-| type | 表单项类型 | String | 是 |
-| placeholder | 占位文本 | String | 否 |
-| width | 表单项宽度（栅格跨度） | Number | 否，默认为3 |
-| children | 下拉选项数据（用于select/selectV2/treeSelect类型） | Array | 否 |
-| isDict | 是否为字典数据 | Boolean | 否 |
-| otherOptions | 其他配置项，会通过v-bind传递给表单控件 | Object | 否 |
-| isSnCustomControl | 是否为自定义控件 | Boolean | 否 |
-| isPrepend | 是否使用前置内容（仅用于text类型） | Boolean | 否 |
-| prependOptions | 前置选择器配置（当isPrepend为true时使用） | Object | 否 |
-| fieldArr | 自定义日期区间的字段数组（用于customDaterange类型） | Array | 否 |
-| options | 单选/复选框选项（用于radio/checkbox类型） | Array | 否 |
-| bindKey | 下拉选择器的值绑定键名（用于selectV2类型） | String | 否，默认为'sn' |
-| defaultProps | 树形选择器配置（用于treeSelect类型） | Object | 否 |
+| showResult | 是否显示已选条件 | Boolean | false |
+| drag | 是否允许拖拽排序 | Boolean | false |
+| collapse | 是否允许展开/收起 | Boolean | true |
+| dataSortable | 是否启用数据排序功能 | Boolean | false |
+| showItem | 是否显示表单项配置按钮 | Boolean | false |
+
+### formItems 配置项
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| field | 字段名，对应表单数据对象的键名 | String | - |
+| label | 标签文本 | String | - |
+| type | 表单控件类型 | String | - |
+| width | 表单项宽度（基于20等分栅格） | Number | 2 |
+| placeholder | 占位符文本 | String | - |
+| attrs | 传递给表单控件的属性 | Object | - |
+| rules | 表单校验规则 | Array/Function | - |
+| visible | 是否可见 | Boolean/Function | true |
+| show | 是否显示 | Boolean/Function | true |
+| isText | 是否以纯文本方式展示 | Boolean/Function | false |
+| children | 选项数据（用于select等控件） | Array/Function | - |
+| events | 事件对象 | Object | - |
+| formatter | 格式化函数 | Function | - |
+| showResult | 是否在已选条件中显示 | Boolean | true |
+| slots | 插槽配置 | Object | - |
 
 ### 支持的表单控件类型
 
-- `text`: 文本输入框
-- `number`: 数字输入框
-- `password`: 密码输入框
-- `textarea`: 文本域
-- `select`: 下拉选择器
-- `selectV2`: 虚拟下拉选择器（适用于大数据量）
-- `treeSelect`: 树形下拉选择器
-- `selectTexterea`: 自定义文本选择器
-- `radio`: 单选框组
-- `checkbox`: 复选框组
-- `date`: 日期选择器
-- `datetime`: 日期时间选择器
-- `daterange`: 日期范围选择器
-- `customDaterange`: 自定义日期区间选择器
+| 类型 | 说明 |
+| --- | --- |
+| input | 输入框 |
+| inputNumber | 数字输入框 |
+| select | 下拉选择器 |
+| selectV2 | 虚拟列表选择器 |
+| radio | 单选框 |
+| checkbox | 复选框 |
+| datePicker | 日期选择器 |
+| treeSelect | 树形选择器 |
+| cascader | 级联选择器 |
+| snCompanySelect | 公司选择器 |
+| snPersonalSelect | 人员选择器 |
+| snArea | 地区选择器 |
+| snPoint | 网点选择器 |
+| snInputNumberPicker | 数字区间选择器 |
+| selectTexterea | 多文本输入框 |
+| search | 搜索按钮组（内部使用） |
 
-### 事件
+### Events
 
-| 事件名 | 说明 | 回调参数 |
+| 事件名 | 说明 | 参数 |
 | --- | --- | --- |
-| handleSearch | 点击搜索按钮时触发 | form: 表单数据对象 |
-| handleReset | 点击重置按钮时触发 | - |
-| handleSelectChange | 下拉框选值变化时触发 | (val, item): 选中值和表单项配置 |
-| formDataInit | 重置表单时触发 | callback: 用于更新表单数据的回调函数 |
+| search | 点击搜索按钮时触发 | formData |
+| change | 表单值变化时触发 | { data: formData } |
+| reset | 点击重置按钮时触发 | - |
 
-### 暴露的方法
+### 方法
+
+通过 ref 可以获取到 SnForm 实例并调用实例方法
 
 | 方法名 | 说明 | 参数 |
 | --- | --- | --- |
-| handleReset | 重置表单 | - |
+| loadFormItems | 重新加载表单项 | - |
+| init | 初始化表单 | - |
+| updateStatus | 更新表单状态 | - |
+| getFormItemByField | 根据字段名获取表单项 | field: String |
+| initDataSortableFields | 初始化排序字段列表 | arr: Array, config: Object |
+| getDataSortableFields | 获取当前排序配置 | - |
 
-## 使用示例
+## 高级功能
 
-### 基础用法
+### 动态表单项
 
-```vue
-<template>
-  <SnSearchForm
-    :fieldList="searchFields"
-    :formData="searchForm"
-    :rules="rules"
-    @handleSearch="onSearch"
-    @handleReset="onReset"
-    @handleSelectChange="onSelectChange"
-    @formDataInit="onFormDataInit"
-  />
-</template>
+可以通过函数返回表单项的某些属性，实现动态表单：
 
-<script setup lang="ts">
-import { reactive, ref } from 'vue'
-import SnSearchForm from '@/components/common/SnSearchForm/SnSearchForm.vue'
-import { FormFieldConfig } from '@/components/common/SnSearchForm'
-
-// 搜索表单数据
-const searchForm = reactive({
-  name: '',
-  status: '',
-  createTime: ''
-})
-
-// 搜索字段配置
-const searchFields: FormFieldConfig[] = [
+```javascript
+const formItems = [
   {
-    label: '名称',
-    field: 'name',
-    type: 'text',
-    placeholder: '请输入名称'
-  },
-  {
-    label: '状态',
-    field: 'status',
-    type: 'select',
-    placeholder: '请选择状态',
-    isDict: true,
-    children: [
-      { label: '启用', value: '1' },
-      { label: '禁用', value: '0' }
-    ]
-  },
-  {
-    label: '创建时间',
-    field: 'createTime',
-    type: 'date',
-    placeholder: '请选择创建时间'
-  }
-]
-
-// 表单校验规则
-const rules = {
-  name: [{ required: true, message: '请输入名称', trigger: 'blur' }]
-}
-
-// 搜索事件处理
-const onSearch = (formData: Record<string, any>) => {
-  console.log('搜索数据:', formData)
-  // 执行搜索逻辑
-}
-
-// 重置事件处理
-const onReset = () => {
-  console.log('表单已重置')
-}
-
-// 下拉框选择变化事件
-const onSelectChange = (val: unknown, item: FormFieldConfig) => {
-  console.log('选中值:', val)
-  console.log('表单项配置:', item)
-}
-
-// 表单数据初始化
-const onFormDataInit = (callback: (data: Record<string, any>) => void) => {
-  // 可以在这里设置表单的初始值
-  const initialValues = {
-    name: '',
-    status: '',
-    createTime: ''
-  }
-  callback(initialValues)
-}
-</script>
-```
-
-### 高级搜索示例
-
-```vue
-<template>
-  <SnSearchForm
-    :fieldList="baseSearchFields"
-    :advancedFieldList="advancedSearchFields"
-    :formData="searchForm"
-    :isMoreSeach="true"
-    @handleSearch="onSearch"
-    @handleReset="onReset"
-  />
-</template>
-
-<script setup lang="ts">
-import { reactive } from 'vue'
-import SnSearchForm from '@/components/common/SnSearchForm/SnSearchForm.vue'
-import { FormFieldConfig } from '@/components/common/SnSearchForm'
-
-// 搜索表单数据
-const searchForm = reactive({
-  code: '',
-  name: '',
-  status: '',
-  type: '',
-  startDate: '',
-  endDate: '',
-  remark: ''
-})
-
-// 基础搜索字段配置
-const baseSearchFields: FormFieldConfig[] = [
-  {
-    label: '编码',
-    field: 'code',
-    type: 'text',
-    placeholder: '请输入编码'
-  },
-  {
-    label: '名称',
-    field: 'name',
-    type: 'text',
-    placeholder: '请输入名称'
-  },
-  {
-    label: '状态',
-    field: 'status',
-    type: 'select',
-    placeholder: '请选择状态',
-    isDict: true,
-    children: [
-      { label: '启用', value: '1' },
-      { label: '禁用', value: '0' }
-    ]
-  }
-]
-
-// 高级搜索字段配置
-const advancedSearchFields: FormFieldConfig[] = [
-  {
-    label: '类型',
     field: 'type',
+    label: '类型',
     type: 'select',
-    placeholder: '请选择类型',
-    isDict: true,
     children: [
-      { label: '类型A', value: 'A' },
-      { label: '类型B', value: 'B' },
-      { label: '类型C', value: 'C' }
+      { label: '类型1', value: '1' },
+      { label: '类型2', value: '2' }
     ]
   },
   {
-    label: '日期区间',
-    type: 'customDaterange',
-    isSnCustomControl: true,
-    fieldArr: ['startDate', 'endDate'],
-    placeholder: '选择'
+    field: 'name',
+    label: '名称',
+    type: 'input',
+    visible: () => {
+      // 根据条件决定是否显示
+      return formData.value.type === '1'
+    }
+  }
+]
+```
+
+### 表单项联动
+
+通过监听表单项的 change 事件实现联动：
+
+```javascript
+const formItems = [
+  {
+    field: 'province',
+    label: '省份',
+    type: 'select',
+    children: provinces,
+    events: {
+      change: (val) => {
+        // 根据省份加载城市列表
+        loadCities(val)
+      }
+    }
   },
   {
-    label: '备注',
-    field: 'remark',
-    type: 'textarea',
-    placeholder: '请输入备注'
+    field: 'city',
+    label: '城市',
+    type: 'select',
+    children: cities
   }
 ]
-
-// 搜索事件处理
-const onSearch = (formData: Record<string, any>) => {
-  console.log('搜索数据:', formData)
-  // 执行搜索逻辑
-}
-
-// 重置事件处理
-const onReset = () => {
-  console.log('表单已重置')
-}
-</script>
 ```
 
-### 带前置选择器的输入框
+### 异步加载选项
 
-```vue
-<template>
-  <SnSearchForm
-    :fieldList="searchFields"
-    :formData="searchForm"
-    @handleSearch="onSearch"
-  />
-</template>
+通过函数形式的 children 属性实现异步加载选项：
 
-<script setup lang="ts">
-import { reactive } from 'vue'
-import SnSearchForm from '@/components/common/SnSearchForm/SnSearchForm.vue'
-import { FormFieldConfig } from '@/components/common/SnSearchForm'
-
-// 搜索表单数据
-const searchForm = reactive({
-  searchType: 'name',
-  searchValue: ''
-})
-
-// 搜索字段配置
-const searchFields: FormFieldConfig[] = [
+```javascript
+const formItems = [
   {
-    label: '搜索条件',
-    field: 'searchValue',
-    type: 'text',
-    placeholder: '请输入搜索内容',
-    isPrepend: true,
-    prependOptions: {
-      prependField: 'searchType',
-      prependList: [
-        { label: '名称', value: 'name' },
-        { label: '编码', value: 'code' },
-        { label: '描述', value: 'description' }
-      ]
+    field: 'department',
+    label: '部门',
+    type: 'select',
+    children: async () => {
+      // 异步获取部门列表
+      const res = await api.getDepartments()
+      return res.data
     }
   }
 ]
-
-// 搜索事件处理
-const onSearch = (formData: Record<string, any>) => {
-  console.log('搜索数据:', formData)
-  // 执行搜索逻辑
-}
-</script>
 ```
 
-## 项目中的实际应用示例
+### 自定义表单项渲染
 
-以下是项目中使用SnSearchForm组件的实际示例：
-
-### 进口管理模块 - 商务平台
-
-在进口管理模块的商务平台页面中使用了SnForm组件（SnForm是基于SnSearchForm的封装）：
+通过插槽自定义表单项的渲染：
 
 ```vue
 <template>
-  <PageContainer class="businessPlatformList">
-    <PageHeader>
-      <SnForm
-        id="snBusinessPlatformSnFormId"
-        ref="searchFormRef"
-        v-model="formData"
-        :form-items="fieldList"
-        :search-render="{
-          showResult: true,
-          drag: true,
-          dataSortable: true
-        }"
-        @search="handleSearchForm"
-      />
-    </PageHeader>
-    
-    <PageMain>
-      <!-- 表格内容 -->
-    </PageMain>
-  </PageContainer>
+  <SnForm v-model="formData" :form-items="formItems">
+    <template #custom-field>
+      <div>自定义内容</div>
+    </template>
+  </SnForm>
 </template>
 
-<script lang="ts" setup>
-  import { ref, reactive } from 'vue'
-  import { useDictionaryHook, useSortableFieldsHook } from '@/hooks'
-  
-  // 搜索表单配置
-  const fieldList = ref([
-    {
-      label: '订单号',
-      field: 'orderNo',
-      type: 'text',
-      placeholder: '请输入订单号'
-    },
-    {
-      label: '状态',
-      field: 'state',
-      type: 'select',
-      placeholder: '请选择订单状态',
-      isDict: true,
-      children: [] // 从字典获取
-    },
-    {
-      label: '创建日期',
-      type: 'customDaterange',
-      isSnCustomControl: true,
-      fieldArr: ['startCreateAt', 'endCreateAt'],
-      placeholder: '创建日期'
-    },
-    {
-      label: '报关单号',
-      field: 'reportNo',
-      type: 'text',
-      placeholder: '请输入报关单号'
+<script setup>
+const formItems = [
+  {
+    field: 'custom',
+    label: '自定义',
+    slots: {
+      default: 'custom-field'
     }
-    // 更多搜索字段...
-  ])
-  
-  // 搜索表单数据
-  const formData = reactive({
-    orderNo: '',
-    state: '',
-    startCreateAt: '',
-    endCreateAt: '',
-    reportNo: ''
-    // 更多表单数据...
-  })
-  
-  // 搜索处理函数
-  const handleSearchForm = (params) => {
-    // 处理搜索参数
-    const searchParams = {
-      ...params,
-      // 其他参数处理...
-    }
-    // 调用API获取数据
-    getTableData(searchParams)
   }
-  
-  // 获取表格数据
-  const getTableData = async (params) => {
-    // API调用逻辑...
-  }
+]
 </script>
 ```
 
-### 表单项动态加载数据示例
+### 表单缓存与持久化
 
-在实际应用中，表单项的选项数据通常需要从API动态获取：
+SnForm 组件会自动将表单配置和值缓存到 localStorage，用户可以通过表单设置功能管理这些缓存：
 
-```typescript
-// 进口类别下拉选项动态加载
-const getImportpCategoryTree = async () => {
-  const params = {
-    dataSource: 0 // 数据来源(0:初始化导入，1自建数据）
-  }
-  const res = await getImportpCategoryTreeApi(params)
-  if (res) {
-    fieldList.value.map((item: any) => {
-      if (item.field === 'instImportCategorySn') {
-        item.children = res
-      }
-    })
-  }
-}
+- 保存表单排序
+- 保存预设值
+- 重置或删除缓存配置
 
-// 组件挂载时调用
-onMounted(() => {
-  getImportpCategoryTree()
-  // 其他初始化...
-})
-```
+### 日期范围选择器
 
-### 搜索表单与表格联动
+日期范围选择器会自动处理开始日期和结束日期的禁用逻辑，确保用户选择有效的日期范围：
 
-SnSearchForm组件通常与表格组件（如SnVxeGrid）配合使用，实现搜索-展示的数据流：
-
-```typescript
-// 搜索处理
-const handleSearchForm = (params) => {
-  // 保存搜索条件
-  Object.assign(data.searchParams, params)
-  // 重置分页
-  data.current = 1
-  // 获取表格数据
-  getTableData()
-}
-
-// 获取表格数据
-const getTableData = async () => {
-  const params = {
-    ...data.searchParams,
-    current: data.current,
-    rows: data.rows
-  }
-  
-  try {
-    const res = await getTableDataApi(params)
-    if (res) {
-      // 更新表格数据
-      data.tableData = res.records || []
-      data.total = res.total || 0
+```javascript
+{
+  field: 'dateRange',
+  label: '日期范围',
+  type: 'datePicker',
+  attrs: {
+    type: 'daterange',
+    startPlaceholder: '开始日期',
+    endPlaceholder: '结束日期',
+    disabledStartDate: (date) => {
+      // 自定义开始日期禁用逻辑
+      return date < new Date()
+    },
+    disabledEndDate: (date) => {
+      // 自定义结束日期禁用逻辑
+      return date > new Date(new Date().setDate(new Date().getDate() + 30))
     }
-  } catch (error) {
-    console.error(error)
   }
-}
-
-// 分页处理
-const handleSizeChange = (val: number) => {
-  data.rows = val
-  getTableData()
-}
-
-const handleCurrentChange = (val: number) => {
-  data.current = val
-  getTableData()
 }
 ```
 
 ## 注意事项
 
-1. 表单项的 `field` 属性必须与 `formData` 中的字段名保持一致
-2. 使用 `isMoreSeach` 开启高级搜索功能时，需要同时提供 `advancedFieldList` 配置
-3. 自定义控件需要设置 `isSnCustomControl: true`
-4. 重置表单时，需要在 `formDataInit` 事件中设置表单初始值
-5. 表单校验规则格式需要符合 Element Plus 的 Form 组件规则
-
-## TypeScript支持
-
-为了更好地使用TypeScript，组件提供了完整的类型定义。在使用组件时，请引入相关类型：
-
-```typescript
-import SnSearchForm, { FormFieldConfig } from '@/components/common/SnSearchForm'
-
-// 使用类型定义表单字段配置
-const searchFields: FormFieldConfig[] = [
-  // 表单项配置...
-]
-```
-
-### 已解决的TypeScript问题
-
-组件中存在以下TypeScript类型问题，已通过类型定义文件解决：
-
-1. 表单项配置的类型定义
-2. 组件Props的类型定义
-3. 事件回调参数的类型定义
-
-### 如果遇到类型错误
-
-如果在使用过程中遇到TypeScript类型错误，可以尝试以下解决方案：
-
-1. 确保正确导入类型定义：
-   ```typescript
-   import { FormFieldConfig } from '@/components/common/SnSearchForm'
-   ```
-
-2. 为表单数据和事件处理函数添加正确的类型注解：
-   ```typescript
-   const searchForm: Record<string, any> = reactive({...})
-   
-   const onSearch = (formData: Record<string, any>) => {...}
-   ```
-
-3. 如果使用自定义控件，确保正确设置`isSnCustomControl: true`属性
-
-## 样式定制
-
-组件内部已经设置了基础样式，确保表单项布局合理。如需自定义样式，可以通过覆盖以下类名：
-
-- `.form-search`: 整个搜索表单容器
-- `.form-search-container`: 搜索表单内容容器
-- `.searchForm`: 表单元素
-- `.df-CustomIntervalSearch`: 自定义日期区间搜索组件
+1. 表单项的 `field` 属性支持嵌套对象路径，如 `user.name`
+2. 当使用日期范围选择器时，表单数据应初始化为数组 `[]`
+3. 表单校验规则可以是数组或返回数组的函数
+4. 使用拖拽排序功能时，需要设置 `searchRender.drag` 为 `true`
+5. 表单项的宽度基于20等分的栅格系统，默认为2 
