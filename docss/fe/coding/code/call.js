@@ -28,8 +28,8 @@ function get(params) {
 }
 
 const obj = {
-  name: 'maomao',
-  age: 18
+  name: 'shenNong',
+  age: 18,
 }
 
 console.log(`call :>> `, get.call(obj, 'call'))

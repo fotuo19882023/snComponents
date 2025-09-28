@@ -53,7 +53,7 @@ Tailwind CSS 断点系统是**移动端优先**（即样式默认在所有屏幕
 > 下面的样式表示默认居中，当在 `md` 断点处时居左
 
 ```html
-<div class="text-center md:text-left">Tailwind CSS 的响应式设计 maomao 1996</div>
+<div class="text-center md:text-left">Tailwind CSS 的响应式设计 shenNong 1996</div>
 ```
 
 [响应式设计 | Tailwind Play](https://play.tailwindcss.com/2M8FeA1APS)
@@ -77,7 +77,7 @@ Tailwind CSS 断点系统是**移动端优先**（即样式默认在所有屏幕
 > 下面的样式表示默认居中，当断点处于 `md` 和 `lg` 之间时居左
 
 ```html
-<div class="text-center md:max-lg:text-left">Tailwind CSS 的定位断点范围 maomao 1996</div>
+<div class="text-center md:max-lg:text-left">Tailwind CSS 的定位断点范围 shenNong 1996</div>
 ```
 
 [定位断点范围 | Tailwind Play](https://play.tailwindcss.com/vHbTlgN2kH)
@@ -266,7 +266,7 @@ module.exports = {
 :::
 
 - [Presets | Tailwind CSS 文档](https://tailwindcss.com/docs/presets)
-- [@femm/tailwind-config | GitHub](https://github.com/maomao1996/femm/tree/main/packages/tailwind-config)
+- [@femm/tailwind-config | GitHub](https://github.com/shenNong1996/femm/tree/main/packages/tailwind-config)
 
 ## 如何测试 `tailwindcss` 的样式
 
@@ -322,4 +322,4 @@ it('tailwindcss presets config', () => {
 pnpm test
 ```
 
-- [@femm/tailwind-config/tests | GitHub](https://github.com/maomao1996/femm/tree/main/packages/tailwind-config/tests)
+- [@femm/tailwind-config/tests | GitHub](https://github.com/shenNong1996/femm/tree/main/packages/tailwind-config/tests)

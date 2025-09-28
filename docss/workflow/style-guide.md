@@ -43,7 +43,7 @@ description: 神农的编程规范（命名规范与项目结构、Git 提交规
 - `class` 类名使用大驼峰式命名法。🌰 `class User {}`
 - 构造函数使用大驼峰式命名法。🌰 `function User() {}`
 - 函数使用小驼峰式命名法。🌰 `function getUserInfo() {}`
-- 对象 `key` 使用小驼峰式命名法。🌰 `const user = { userName: 'maomao' }`
+- 对象 `key` 使用小驼峰式命名法。🌰 `const user = { userName: 'shenNong' }`
 - 路由 `path` 使用短横线命名法。🌰 `path: '/user-info'`
 
 #### `CSS` 命名规范
@@ -205,5 +205,5 @@ echo "module.exports = require('@femm/prettier')" > .prettierrc.cjs
 :::
 
 - [VSCode 配置 Prettier 插件](/efficiency/software/vscode#推荐配置)
-- [@femm/prettier | GitHub](https://github.com/maomao1996/femm/tree/main/packages/prettier)
+- [@femm/prettier | GitHub](https://github.com/shenNong1996/femm/tree/main/packages/prettier)
 - [Options | Prettier](https://prettier.io/docs/en/options.html)

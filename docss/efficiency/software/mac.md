@@ -483,7 +483,7 @@ brew install --cask rectangle
 长按 `Command` 即可查看当前应用的快捷键提示
 
 - [软件官网](https://www.ergonis.com/products/keycue/)
-- [安装包](https://github.com/maomao1996/software-backup/tree/main/mac/CheatSheet)
+- [安装包](https://github.com/shenNong1996/software-backup/tree/main/mac/CheatSheet)
 
 ## 显示器控制 MonitorControl
 

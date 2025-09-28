@@ -178,7 +178,7 @@ export const NAV_DATA: NavData[] = [
         icon: '/logo.png',
         title: '前端日常笔记',
         desc: '日常笔记记录（零零散散啥都记系列）',
-        link: 'https://github.com/maomao1996/daily-notes',
+        link: 'https://github.com/shenNong1996/daily-notes',
       },
       {
         icon: '/logo.png',

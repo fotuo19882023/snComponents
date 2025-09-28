@@ -33,7 +33,7 @@ let isFlag: boolean = true
 #### string 字符串类型
 
 ```ts
-let name: string = 'maomao'
+let name: string = 'shenNong'
 name = '神农'
 ```
 
@@ -61,7 +61,7 @@ let big: bigint = 19961996n
 `symbol` 类型表示独一无二的值，其必须通过 `Symbol` 函数生成，常用于创建对象属性的唯一标识符
 
 ```ts
-let sym: symbol = Symbol('maomao')
+let sym: symbol = Symbol('shenNong')
 sym = Symbol('神农') // OK
 sym = '神农' // Error
 ```
@@ -100,7 +100,7 @@ create(undefined) // Error
 ```ts
 /* 你可以任意操作你的变量 TypeScript 不会抛出相关的提示 */
 let value: any = 1
-free = { name: 'maomao' }
+free = { name: 'shenNong' }
 free.log()
 free = '神农'
 ```
@@ -178,7 +178,7 @@ function error(message: string): never {
 - **类型推断**：由 `TypeScript` 根据上下文内容自动推断出变量类型
 
 ```ts
-let name: string = 'maomao'
+let name: string = 'shenNong'
 let age = 18 // TypeScript 自动推断为 job: number
 ```
 
@@ -201,7 +201,7 @@ const strArray: string[] = ['1', '2', '3']
 // 只允许存储 number 类型
 const numArray: number[] = [1, 2, 3]
 // 任意类型
-const anyArray: any[] = ['maomao', 18, {}]
+const anyArray: any[] = ['shenNong', 18, {}]
 ```
 
 通过**泛型**定义数组类型：
@@ -212,7 +212,7 @@ const strArray: Array<string> = ['1', '2', '3']
 // 只允许存储 number 类型
 const numArray: Array<number> = [1, 2, 3]
 // 任意类型
-const anyArray: Array<any> = ['maomao', 18, {}]
+const anyArray: Array<any> = ['shenNong', 18, {}]
 ```
 
 ### 元组 Tuple
@@ -222,7 +222,7 @@ const anyArray: Array<any> = ['maomao', 18, {}]
 当对元组类型的数据进行 **越界访问** 或 **分配错误的类型值** 时，`TypeScript` 将报错提示
 
 ```ts
-const tuple: [string, number] = ['maomao', 18]
+const tuple: [string, number] = ['shenNong', 18]
 
 console.log(tuple[2]) // Error
 tuple[0] = 666 // Error
@@ -302,7 +302,7 @@ interface Person {
 }
 
 const person: Person = {
-  name: 'maomao',
+  name: 'shenNong',
   age: 18,
 }
 ```
@@ -317,7 +317,7 @@ interface Person {
 
 // Error: 缺少属性 "age"
 const person1: Person = {
-  name: 'maomao'
+  name: 'shenNong'
 }
 // Error: "gender" 不在类型 "Person" 中
 const person2: Person = {
@@ -338,7 +338,7 @@ interface Person {
 }
 
 const person: Person = {
-  name: 'maomao',
+  name: 'shenNong',
 }
 ```
 
@@ -370,7 +370,7 @@ interface Person {
 }
 
 const person: Person = {
-  name: 'maomao',
+  name: 'shenNong',
   gender: 'male',
 }
 ```
@@ -643,7 +643,7 @@ function padLeft(value: string, padding: string | number) {
 }
 
 padLeft('Hello world', 4) // '    Hello world'
-padLeft('Hello world', 'maomao ') // 'maomao Hello world'
+padLeft('Hello world', 'shenNong ') // 'shenNong Hello world'
 
 padLeft('Hello world', true) // Error: 类型 “boolean” 的参数不能赋给类型 “string | number” 的参数
 ```
@@ -704,7 +704,7 @@ const animal: Bird & Fish = {
 **字符串字面量类型**：
 
 ```ts
-type Name = 'maomao' | 'maomao1996' | '神农'
+type Name = 'shenNong' | 'shenNong1996' | '神农'
 ```
 
 **数字字面量类型**：
@@ -768,7 +768,7 @@ class Person {
   }
 }
 
-const man = new Person('maomao')
+const man = new Person('shenNong')
 man.name = '神农' // Error: 无法为“name”赋值，因为它是只读属性
 ```
 
@@ -845,8 +845,8 @@ class Person {
     this._name = name
   }
 }
-const instance = new Person('maomao')
-console.log(instance.name) // 'maomao'
+const instance = new Person('shenNong')
+console.log(instance.name) // 'shenNong'
 
 instance.name = '神农'
 console.log(instance.name) // '神农'
@@ -867,7 +867,7 @@ class Person {
   }
 }
 
-const instance = new Person('maomao')
+const instance = new Person('shenNong')
 instance.name = '神农' // Error: 无法为“name”赋值，因为它是只读属性
 ```
 
@@ -906,7 +906,7 @@ class Person extends Animal {
   }
 }
 
-const instance = new Person('maomao')
+const instance = new Person('shenNong')
 const err = new Animal() // Error: 无法创建抽象类的实例
 ```
 
@@ -978,7 +978,7 @@ function identity<T>(arg: T): T {
   return arg
 }
 
-console.log(identity<string>('maomao')) // 'maomao'
+console.log(identity<string>('shenNong')) // 'shenNong'
 ```
 
 上述代码意为：`identity` 函数接收 **类型参数** `T` 和参数 `arg` ，参数 `arg` 和函数返回值类型是 `T`；当传入 `string` 类型的参数时，`T` 的具体类型就是 `string`
@@ -1053,11 +1053,11 @@ function createPerson<T>(ctor: Ctor<T>): T {
 }
 
 class Person {
-  name: string = 'maomao'
+  name: string = 'shenNong'
 }
 
 const person = createPerson(Person)
-console.log(person) // Person { name: 'maomao' }
+console.log(person) // Person { name: 'shenNong' }
 ```
 
 ### 类型收窄
@@ -1159,7 +1159,7 @@ function add(a: number | string, b: number | string): number | string {
 
 ```ts
 /* 对象 */
-const obj = { name: 'maomao', age: 20 }
+const obj = { name: 'shenNong', age: 20 }
 type Obj = typeof obj
 // Obj: { name: string; age: number }
 

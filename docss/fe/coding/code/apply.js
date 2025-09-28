@@ -28,8 +28,8 @@ function get(params) {
 }
 
 const obj = {
-  name: 'maomao',
-  age: 18
+  name: 'shenNong',
+  age: 18,
 }
 
 console.log(`apply :>> `, get.apply(obj, ['apply']))

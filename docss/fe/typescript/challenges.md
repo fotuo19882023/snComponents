@@ -803,7 +803,7 @@ type Permutation<T, K = T> = [T] extends [never]
 `LengthOfString<S>` 用于计算字符串的长度
 
 ```ts
-type result = LengthOfString<'maomao'>
+type result = LengthOfString<'shenNong'>
 // 结果：6
 ```
 
@@ -822,7 +822,7 @@ type LengthOfString<S extends string, T extends string[] = []> = S extends `${in
 
 ```ts
 // 第一次调用
-type result1 = LengthOfString<'maomao', []> // T = []
+type result1 = LengthOfString<'shenNong', []> // T = []
 
 // 第二次调用
 type result2 = LengthOfString<'aomao', ['m']> // T = ['m']
@@ -866,8 +866,8 @@ type Flatten<T extends any[]> = T extends [infer L, ...infer R]
 `AppendToObject` 可以给对象（接口）追加一个新的属性
 
 ```ts
-type result = AppendToObject<{ id: number }, 'name', 'maomao'>
-// 结果：{ id: number; name: 'maomao' }
+type result = AppendToObject<{ id: number }, 'name', 'shenNong'>
+// 结果：{ id: number; name: 'shenNong' }
 ```
 
 **实现**:

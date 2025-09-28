@@ -4,7 +4,7 @@ description: '神农的 zsh 配置和好用的插件、主题'
 
 # zsh 配置
 
-> 个人所有配置已上传至 [maomao1996/dotfiles | GitHub](https://github.com/maomao1996/dotfiles/tree/main/zsh)
+> 个人所有配置已上传至 [shenNong1996/dotfiles | GitHub](https://github.com/shenNong1996/dotfiles/tree/main/zsh)
 
 `zsh` 相关配置和好用的插件、主题
 
@@ -85,7 +85,7 @@ zinit load [插件]
 zinit light [插件]
 
 # 从 url 中加载插件
-zinit snippet "https://github.com/maomao1996/dotfiles/blob/main/zsh/femm.plugin.zsh"
+zinit snippet "https://github.com/shenNong1996/dotfiles/blob/main/zsh/femm.plugin.zsh"
 
 # 延迟加载 oh my zsh 中的插件
 zinit ice svn               # 为下一条命令添加修饰符
@@ -308,7 +308,7 @@ source ~/.zshrc
 
 ## 常用配置
 
-具体可参考 —— [神农的 zsh 配置文件](https://github.com/maomao1996/dotfiles/tree/main/zsh)
+具体可参考 —— [神农的 zsh 配置文件](https://github.com/shenNong1996/dotfiles/tree/main/zsh)
 
 :::: code-group
 
@@ -343,9 +343,9 @@ zinit lucid wait="1" for \
     OMZP::git
 
 #--------------------------------------------------#
-# 加载 maomao 的自定义配置插件
+# 加载 shenNong 的自定义配置插件
 #--------------------------------------------------#
-zinit snippet "https://github.com/maomao1996/dotfiles/blob/main/zsh/femm.plugin.zsh"
+zinit snippet "https://github.com/shenNong1996/dotfiles/blob/main/zsh/femm.plugin.zsh"
 
 #--------------------------------------------------#
 # 内置环境变量修改
@@ -448,7 +448,7 @@ if [[ -d .git ]]; then
   localName=$(git config user.name)
   localEmail=$(git config user.email)
   # 只判断 github 仓库，根据需要修改（判断字符建议写长点）
-  if [[ $url =~ "github.com/maomao1996" ]]; then
+  if [[ $url =~ "github.com/shenNong1996" ]]; then
     # 提示当前为 github 项目（不需要就注释）
     echo -e "\033[34m当前为 github 项目\033[0m"
     if [[ $githubName && $githubName != $localName ]]; then

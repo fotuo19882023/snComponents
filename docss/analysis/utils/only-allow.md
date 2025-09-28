@@ -37,7 +37,7 @@ npm run prebuild && npm run build && npm run postbuild
 ```
 
 ::: info 相关资料
-[使用 npm 脚本钩子](https://github.com/maomao1996/daily-notes/issues/20)
+[使用 npm 脚本钩子](https://github.com/shenNong1996/daily-notes/issues/20)
 :::
 
 ## `only-allow` 源码笔记
