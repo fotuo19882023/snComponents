@@ -7,28 +7,28 @@ const data = [
   {
     items: [
       {
-        img: withBase('/sponsor/wechat-color.webp')
-      }
-    ]
+        img: withBase('/sponsor/wechat-color.webp'),
+      },
+    ],
   },
   {
     items: [
       {
-        img: withBase('/sponsor/alipay-color.webp')
-      }
-    ]
-  }
+        img: withBase('/sponsor/alipay-color.webp'),
+      },
+    ],
+  },
 ]
 </script>
 
-<template>
+<!-- <template>
   <p class="m-sponsor-title">
     鼓励作者：欢迎
     <VPLink href="https://github.com/maomao1996/mm-notes" no-icon>star</VPLink>
     或打赏犒劳
   </p>
   <VPDocAsideSponsors :data="data" />
-</template>
+</template> -->
 
 <style lang="scss">
 .m-sponsor-title {

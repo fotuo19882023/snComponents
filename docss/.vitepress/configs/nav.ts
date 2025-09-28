@@ -68,6 +68,20 @@ export const nav: DefaultTheme.Config['nav'] = [
     activeMatch: '^/workflow',
   },
   {
+    text: '神农定义组件',
+    items: [
+      {
+        text: '搜索组件',
+        link: '/userComponents/searchForm/searchForm',
+      },
+      {
+        text: 'select组件',
+        link: '/userComponents/select/select',
+      },
+    ],
+    activeMatch: '^/userComponents',
+  },
+  {
     text: '笔记',
     items: [
       { text: '日常笔记', link: '/daily-notes/', activeMatch: '^/daily-notes' },
