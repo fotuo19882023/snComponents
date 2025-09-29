@@ -154,6 +154,10 @@ export const sidebar: DefaultTheme.Config['sidebar'] = {
       link: '/userComponents/select/select',
     },
     {
+      text: 'snSelectV2组件',
+      link: '/userComponents/snSelectV2/snSelectV2',
+    },
+    {
       text: '表格组件',
       link: '/userComponents/grid/',
     },
